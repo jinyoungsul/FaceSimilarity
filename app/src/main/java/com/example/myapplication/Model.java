@@ -17,7 +17,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class Model {
-    private static String MODEL_NAME = "big_model2.ptl";
+    private static String MODEL_NAME = "fine_tuned_model.ptl";
+
     Context context;
     Module module;
 
@@ -29,10 +30,18 @@ public class Model {
     }
 
     public Tensor recognize(Bitmap image){
+
         Tensor input =  TensorImageUtils.bitmapToFloat32Tensor(
                 image,
                 TensorImageUtils.TORCHVISION_NORM_MEAN_RGB,
                 TensorImageUtils.TORCHVISION_NORM_STD_RGB);
+
+//        float[] a = new float[]{1.0f, 1.0f, 1.0f};
+//        float[] b = new float[]{1.0f, 1.0f, 1.0f};
+//        Tensor input =  TensorImageUtils.bitmapToFloat32Tensor(
+//                image, a, b);
+
+
         Tensor output = module.forward(IValue.from(input)).toTensor();
 
         return output;
