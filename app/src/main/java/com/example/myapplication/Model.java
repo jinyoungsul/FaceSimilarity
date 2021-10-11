@@ -35,13 +35,6 @@ public class Model {
                 image,
                 TensorImageUtils.TORCHVISION_NORM_MEAN_RGB,
                 TensorImageUtils.TORCHVISION_NORM_STD_RGB);
-
-//        float[] a = new float[]{1.0f, 1.0f, 1.0f};
-//        float[] b = new float[]{1.0f, 1.0f, 1.0f};
-//        Tensor input =  TensorImageUtils.bitmapToFloat32Tensor(
-//                image, a, b);
-
-
         Tensor output = module.forward(IValue.from(input)).toTensor();
 
         return output;
